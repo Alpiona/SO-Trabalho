@@ -1,0 +1,18 @@
+﻿Parte 2:
+	Para resolver a primeira parte, que utiliza apenas os macacos, possuia duas funções, uma representando cada lado da ponte, e foi feito apenas 1 semáforo, que faz a contagem de quantos estão atravessando a ponte. Os threads, represetando os macacos, ficavam em loop buscando o valor de quantos estavam atravessando, e saia do loop quando não tinha nenhum atravessando, que era quando alterava a direção (que é representada por uma variável int global).
+	A segunda parte, que é quando foram adicionados os gorilas, foi feito usando apenas uma nova função para eles, e não duas para representar cada lado. Essa resolução foi usada, pois o gorila precisa atravessar sozinho e ter prioridade sobre os macacos, o lado que ele está não altera no controle da passagem.
+	Após algum gorila passar, ocorria com certa frequência de macacos passarem ao mesmo temepo, em sentidos opostos, no mesmo instante que o gorilo terminava a atravessia. Para resolver, foi necessário alterar o método de controle de direção, de modo que tivesse um certo intervalo para verificar se era possível alterar a direção, e assim evitando que isso aconteca.
+
+Parte 3:
+	O problema inicial nessa questão, foi o jeito que foi organizado as etapas de resolução. O certo seria resolver na ordem que diz o enunciado (conseguir executar com pipes, depois redirecionamento e background por último), pois nessa ordem, não seria necessário ficar alterando os métodos anteriores como em uma ordem diferente. Porém, o programa conseguia executar em background antes de tratar pipes, e as duas antes de redirecionamento, sendo inevitável fazer grandes mudanças em funções anteriores.
+	Para a resolução dessa questão, foi necessário fazer o programa dividir os comandos do usúario em partes cada vez menores para ser executados no final.
+	No começo, é lido a linha de comandos escrita pelo usuário, e é dividido para cada ‘&’ encontrada, de forma que os comandos antes de ‘&’ rode em um novo processo.
+	Após isso, uma nova função divide novamente os comandos, encontrando seus parâmetros e procurando ‘|’ e ‘>’ ou ‘<’, para identificar a quantidade de pipes necessárias, além de a possível necessidade de redirecionar entrada ou saída.
+	Por último, é feito um loop de acordo com a quantidade de ‘|’, para ser feitos os pipes necessários entre as execuções dos comandos. A entrada do primeiro ou sáida do último, é alterada em caso de redirecionamento.
+
+Parte 4:
+	Para esse problema, foram criados duas funçoes, uma para os jovens que querem atravessar, e outro para o barqueiro.  
+	A fila foi feita usando um vetor de inteiro de tamanho 15, onde cada casa representa a posição daquele jovem, por exemplo, se a posição 5 no vetor, guarda o número 3, significa que o jovem 5 está em terceiro na fila. Cada vez que o barqueiro retorna, ele diminui a posição de todos na fila em 3, os que acabam recebendo uma nova posição de valor menor que 1, entram no barco assim que libera os espaços representados no semáforo.
+	Foram criados 4 semáforos, para o controle de espaço no barco, matagal, o momento que sai da vila, e quando atravessa o lago.
+	Para o momento que alguém foi pego, foi utilizado uma variável global identificando esse momento. E foi utilizado ‘srand’ da biblioteca de ‘time.h’ para ser aleatório o número do jovem que vai ser pego. Após essa variável se alterar, o barqueiro vai para uma nova função, que cria o Named Pipe com a mensagem.
+	
